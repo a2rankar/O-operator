@@ -1,7 +1,7 @@
 const express = require('express');
 const {pool} = require('../config/database');
-const {tokenVerify, requireRole} = require('../middleware/auth');
-
+const {tokenVerify} = require('../middleware/auth');
+const {requireRole} = require('../middleware/guard')
 
 const router = express.Router();
 

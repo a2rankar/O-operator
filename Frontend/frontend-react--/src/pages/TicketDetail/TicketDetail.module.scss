@@ -3,7 +3,9 @@
     background-color: #ffffff;
     border-radius: 10px;
     border: none;
+    color: #070707;
 
+   
 }
 .barside {
     display: flex;
@@ -12,6 +14,7 @@
     justify-content: start;
     width: 140px;
     background-color: black;
+    color: #ffffff;
 
          padding-top: 40px;
 .tickets {
@@ -28,23 +31,23 @@
     display: flex;
 }
     input {
-   
         width: 20px;
     }
 }
 .main {
     padding: 20px;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-        height: 335px;
+
 
  
 }
 .selection {
     display: flex;
-
+    width: 200px;
  
 }
 .header {
@@ -54,53 +57,23 @@
     justify-content: space-between;
 
 
-}.main_head {
-    display: flex;
-    color: #070707;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
 }
-.set {
-    display: flex;
-    text-align: center;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 140px;
-    color: black;
-    flex-direction: column;
-    p {
-            padding: 0px;
-            margin: 0px;
-    }
-    .row {
-        display: flex;
-        justify-content: space-around;
 
-    
-    }
-}
 h1 {
     padding: 0%;
     margin: 0%;
     color: #070707;
-}.selection {
-    
-gap: 20px;
-height: 40px;
 }
 .selection1 {
     height: 40px;
       background-color: #ffffff;
       color: #070707;
       border-radius: 10px;
+      width: 100%;
 
 
 }
-    input {
-        width: 100px;
-        height: 40px;
-    }
+  
     
     .option {
 
@@ -116,23 +89,49 @@ option {
   padding: 5px 10px;  
 
 }
-.set .row {
-  border-bottom: 1px solid #070707; 
-  padding: 8px 0; 
-}
 
-
-.set .row:last-child {
-  border-bottom: none;
-}
 button {
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 100%;
     text-align: center;
-
+    margin: 0px;
+    padding: 5px;
+    
 }
 hr {
-    border: 1px solid black;
+    border: 0.5px solid black;
+    width: 0px;
+    margin: 20px;
+
+}
+
+.under {
+    display: flex;
+    
+}
+.leftside {
+    flex-direction: column;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 300px;
+
+}
+.right_side {
+display: flex;
+width: 300px;
+flex-direction: column;
+gap: 20px;
+
+input {
     width: 100%;
+    padding: 0px 0px 0px 5px;
+
+}
+}
+textarea {
+        width: 100%;
+        color: #070707;
+background: none;
 }

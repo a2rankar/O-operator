@@ -21,6 +21,7 @@ router.get('/', tokenVerify, async (req, res) => {
     res.json(result.rows);
 });
 
+
 router.post('/', tokenVerify, async (req ,res) => {
     const {title, description} = req.body;
     const userId = req.user.id;
@@ -53,6 +54,40 @@ router.post('/:id/comment', tokenVerify, async (req, res) => {
         [req.params.id, userId, content]
     );
     res.status(201).json({message: 'Comment added'});
+});
+
+
+
+
+router.get('/:id', tokenVerify, async (req, res) => {
+  const ticketId = req.params.id;
+  try {
+    const result = await pool.query(
+      `SELECT tickets.*, users.name AS name
+       FROM tickets
+       LEFT JOIN users ON tickets.created_by = users.id
+       WHERE tickets.id = $1`,
+      [ticketId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Ticket not found' });
+    }
+
+
+    const commentsRes = await pool.query(
+      `SELECT * FROM comments WHERE ticket_id = $1 ORDER BY created_at DESC`,
+      [ticketId]
+    );
+
+    const ticket = result.rows[0];
+    ticket.comments = commentsRes.rows;
+
+    res.json(ticket);
+  } catch (err) {
+    console.error('Error fetching ticket:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 export default router;

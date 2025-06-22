@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Tickets.module.scss'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type Ticket = {
     id: number;
@@ -13,14 +14,20 @@ type Ticket = {
 }
 
 const TicketLists = () => {
-
     const [tickets, setTickets] = useState<Ticket[]>([])
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-      const [username, setUsername] = useState('');
-      const[name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const[name, setName] = useState('');
     const [showForm, setShowForm] = useState(false);
-      const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+      // Отфильтруем последние три тикета
+    const lastThreeTickets = tickets.slice(-3);
+    const navigate = useNavigate();
+  const handleTicketClick = (ticketId: number) => {
+    
+    navigate(`/ticketDetail/${ticketId}`);
+  };
     useEffect(() => {
             fetch()
         }, [])
@@ -42,7 +49,7 @@ const TicketLists = () => {
         };
 
     const createTicket = async () => {
-        if (!title.trim() || !description.trim()) {
+        if (!title.trim()) {
             alert('Zapolnite pole')
             return;
         }
@@ -70,52 +77,52 @@ const TicketLists = () => {
     return (
         <div className={styles.container}>
             <div className={styles.barside}>
-               <input type='checkbox'/>
-               <input type='checkbox'/>
+                <div className={styles.tickets}>
+                    <input type='checkbox'/> <p>Tickets</p>
+                </div>
+                <div className={styles.dashboard}>
+                <   input type='checkbox'/>  <p>Dashboard</p>
+                </div>
             </div>
             <div className={styles.main}>
                 <div className={styles.header}>
                     <h1>Tickets</h1>
-                    <button onClick={() => setShowForm(!showForm)}>
-                        {showForm ? 'Отмена' : 'Создать тикет'}
-                    </button>       
+                                <button onClick={() => setShowForm(!showForm)}>
+                                    {showForm ? 'Отмена' : 'Создать тикет'}
+                                </button>  
                         <div className={styles.selection}>
-                            <select >
-                                    <option value='' disabled>
-                                        Select role
+                            <select  className={styles.selection1}>
+                                    <option value='' disabled className={styles.option}>
+                                            Status     
                                     </option>
-                                    <option value='operator'>Operator</option>
-                                    <option value='supervisor'>Supervisor</option>
+                                    <option value='open'>opened</option>
+                                    <option value='close'>closed</option>
+                                    <option value='inProccess'>in proccess</option>
                             </select>
                             <input type='search' placeholder='Search'/>
                         </div>
-                        {showForm && (
-          <div className={styles.ticketForm}>
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-            />
-               <input
-              type="text"
-              placeholder="username"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-            />
-            <textarea
-              placeholder="Description"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-            />
-            <button onClick={createTicket} disabled={loading}>
-              {loading ? 'Создаём...' : 'Создать'}
-            </button>
-          </div>
-        )}
-                </div>
+                                            {showForm && (
+                            <div className={styles.ticketForm}>
+                                <input
+                                type="text"
+                                placeholder="Title"
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
+                                />
+                                
+                                {/* <textarea
+                                placeholder="Description"
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                                /> */}
+                                <button onClick={createTicket} disabled={loading}>
+                                {loading ? 'Создаём...' : 'Создать'}
+                                </button>
+                            </div>
+                            )}
+            </div>
 
-                <div className={styles.line}/>
+                <hr className={styles.line}/>
 
                 <div className={styles.main_head}>
                     <p>Title</p>
@@ -123,16 +130,27 @@ const TicketLists = () => {
                     <p>Status</p>
                 </div>
                 <div className={styles.set}>
-                    {tickets.map ((ticket)  => (
-                       <div key={ticket.id} className={styles.row}>
-                            <p>{ticket.title}</p>
-                            <p>{ticket.name}</p>
-                            <p>{ticket.status}</p>
+                    {lastThreeTickets.map ((ticket)  => (
+                       <div key={ticket.id} className={styles.row} onClick={() =>
+                        handleTicketClick(ticket.id)}
+                        style={{cursor: 'pointer'}}
+                       >
+                            <div className={styles.qw}>
+                                <p>{ticket.title}</p>
+                            </div>
+                            <div className={styles.qw}>
+                                <p>{ticket.name}</p>
+                            </div>
+                            <div className={styles.qw}>
+                                <p>{ticket.status}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
+      
         </div>
+        
     )
 }
  export default TicketLists;

@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/registration', async (req,res) => {
       console.log(req.body);
-    const { username, password, role } = req.body;
+    const { username, password, role, name } = req.body;
     try {
         const existingUser = await pool.query('SELECT * FROM users WHERE username = $1',
             [username]
@@ -41,8 +41,8 @@ router.post('/registration', async (req,res) => {
         }
         const hash = await bcrypt.hash(password, 10)
         
-        const newCharacter = await pool.query('INSERT INTO users (username, password, role ) VALUES ($1,$2, $3) RETURNING id, username, role ',
-        [username, hash, role]
+        const newCharacter = await pool.query('INSERT INTO users (username, password, role, name ) VALUES ($1,$2, $3, $4) RETURNING id, username, role, name ',
+        [username, hash, role, name]
     );
     console.log('JWT_SECRET:', process.env.JWT_SECRET);
 

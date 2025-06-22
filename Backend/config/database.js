@@ -18,8 +18,9 @@ const connectDb = async () => {
         id SERIAL PRIMARY KEY,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        role TEXT CHECK (role IN ('operator', 'supervisor')) NOT NULL);
-        
+        role TEXT CHECK (role IN ('operator', 'supervisor')) NOT NULL,
+        name TEXT 
+    );
         
         CREATE TABLE IF NOT EXISTS tickets (
         id SERIAL PRIMARY KEY,

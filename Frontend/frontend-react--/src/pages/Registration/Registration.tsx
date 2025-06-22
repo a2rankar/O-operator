@@ -10,6 +10,7 @@ type registrationFormData = {
   password: string;
   confirmPassword: string;
   role: string;
+  name: string;
 };
 
 
@@ -36,6 +37,7 @@ type registrationFormData = {
             username: data.email,
             password: data.password,
             role: data.role,
+            name: data.name,
             }
         )
             console.log('Regsitration data: ', res.data)
@@ -64,6 +66,9 @@ type registrationFormData = {
                                 <input type="email" placeholder="Email"
                                     {...register('email', {required: 'Email id reequireed'})}/>
                                         {errors.email && <p>{errors.email.message}</p>}
+                                <input type="text" placeholder="Name"
+                                    {...register('name', {required: 'name id reequireed'})}/>
+                                        {errors.name && <p>{errors.name.message}</p>}        
                                 <input type="password" placeholder="Password"
                                     {...register('password', {required: 'Password is wrong '})}/>
                                         {errors.password && <p>{errors.password.message}</p>}

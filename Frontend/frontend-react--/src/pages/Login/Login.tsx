@@ -6,13 +6,14 @@ import {useNavigate} from 'react-router-dom';
 
 
 type LoginFormData = {
-  email: string;
+  username: string;
   password: string;
 };
 
 
  const Login = () => {
 const navigate  = useNavigate();
+
 
   const {
     register,
@@ -22,11 +23,15 @@ const navigate  = useNavigate();
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-        const res = await axios.post('http://localhost:4002/api/login',
-            data,
-        )
-            console.log('Login data: ', res.data)
-            navigate('/')
+        const res = await axios.post('http://localhost:4002/api/login', data,)
+        const token = res.data.token;
+        if (token) {
+            localStorage.setItem('token', token);
+            console.log('success');
+            navigate('/tickets')
+        } else {
+            console.error('no toekn')
+        }
     } catch (error) {
         console.error('Login error: ', error)
     }
@@ -42,8 +47,8 @@ const navigate  = useNavigate();
                             your account. </p>
                             <div className={styles.input_cont}>
                                 <input type="email" placeholder="Email"
-                                    {...register('email', {required: 'Email id reequireed'})}/>
-                                        {errors.email && <p>{errors.email.message}</p>}
+                                    {...register('username', {required: 'Email id reequireed'})}/>
+                                        {errors.username && <p>{errors.username.message}</p>}
                                 <input type="password" placeholder="Password"
                                     {...register('password', {required: 'Password is wrong '})}/>
                                         {errors.password && <p>{errors.password.message}</p>}

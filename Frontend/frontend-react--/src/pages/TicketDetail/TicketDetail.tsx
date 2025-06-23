@@ -81,85 +81,79 @@ const TicketDetail = () => {
   const lastComments = ticket.comments.slice(-3).reverse();
 
   return (
-    <div className={styles.container}>
-            <div className={styles.barside}>
-                <div className={styles.tickets}>
-                    <input type='checkbox'/> <p>Tickets</p>
-                </div>
-                <div className={styles.dashboard}>
-                <   input type='checkbox'/>  <p>Dashboard</p>
-                </div>
-            </div>
-            <div className={styles.main}>
-                <div className={styles.header}>
-                    <h1>Ticket#{ticket.id}</h1>
-                             
-                        <div className={styles.selection}>
-                           <select
-                                className={styles.selection1}
-                                value={status}
-                                onChange={(e) => {
-                                    const newStatus = e.target.value;
-                                    setStatus(newStatus);
-                                    handleStatus(newStatus);
-                                }}
-                                    >
-                                    <option value='open'>opened</option>
-                                    <option value='closed'>closed</option>
-                                    <option value='in_progress'>in proccess</option>
-                                    </select>
+    <div className={styles.container_2}>
 
-                        </div>
-                            
+        <div className={styles.container}>
+                <div className={styles.barside}>
+                    <div className={styles.tickets}>
+                        <input type='checkbox'/> <p>Tickets</p>
+                    </div>
+                                    <hr style={{width: '80%', border: '1px solid #3c3b3b', margin: '0px'}}/>
+                    <div className={styles.dashboard}>
+                    <   input type='checkbox'/>  <p>Dashboard</p>
+                    </div>
                 </div>
-             <hr style={{width: '100%'}}/>
-                  
-                <div className={styles.under}>
-                    <div className={styles.leftside}>
-                        <div className={styles.user_info}>
-                             <h3>{ticket.name}</h3>
-                             <p>{ticket.description}</p>
-                        </div>
+                <div className={styles.main}>
+                    <div className={styles.header}>
+                        <h1>Ticket#{ticket.id}</h1>
+                                
+                            <div className={styles.selection}>
+                            <select
+                                    className={styles.selection1}
+                                    value={status}
+                                    onChange={(e) => {
+                                        const newStatus = e.target.value;
+                                        setStatus(newStatus);
+                                        handleStatus(newStatus);
+                                    }}
+                                        >
+                                        <option value='open'>opened</option>
+                                        <option value='closed'>closed</option>
+                                        <option value='in_progress'>in proccess</option>
+                                        </select>
+
+                            </div>
+                                
+                    </div>
+                <hr style={{width: '100%'}}/>
+                    
+                    <div className={styles.under}>
+                        <div className={styles.leftside}>
+                            <div className={styles.user_info}>
+                                <h3>{ticket.name}</h3>
+                                <p>Issie wuth product</p>
+                            </div>
+                                <hr style={{width: '100%', margin: '0px'}}/>
+                            <div className={styles.open_btn}>
+                                <button style={{background: 'none', color: 'black',border: 'none'}}>Open </button>
+                                
+                            </div>
                             <hr style={{width: '100%', margin: '0px'}}/>
-                        <div className={styles.open_btn}>
-                            <button style={{background: 'none', color: 'black'}}>Open </button>
-                               
                         </div>
-                          <hr style={{width: '100%', margin: '0px'}}/>
-                    </div>
-                    <hr className={styles.middle}/>
-                    <div className={styles.right_side}>
-                        <p>Comments</p>
-                        <div className={styles.comment_box}>
-                        {lastComments.length > 0 ? (
-                            lastComments.map(c => (
-                                <div key={c.id}>
-                                    <p>{c.comment}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <p>no comments</p>
-                        )
-                          }
+                        <hr style={{width: '0px',height: '100%', margin: '20px'}}/>
+                        <div className={styles.right_side}>
+                            <p>Comments</p>
+                          
+                            <textarea
+                                
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                                rows={4}
+                            
+                            ></textarea>
+                            <input type="text" placeholder="add a commnet" className={styles.comment}/>
+                            <button className={styles.comment_btn} onClick={handleComment} >Add Comment</button>
+                        
                         </div>
-                        <textarea
-                            placeholder="Add a comment"
-                            value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)}
-                            rows={4}
-                           
-                        ></textarea>
-                        <input type="text" placeholder="add a commnet" className={styles.comment}/>
-                         <button className={styles.comment_btn} onClick={handleComment} >Add Comment</button>
-                      
                     </div>
                 </div>
-            </div>
 
-              
                 
-                
+                    
+                    
 
+        </div>
+            
     </div>
   )
 

@@ -27,8 +27,8 @@ const connectDb = async () => {
         title TEXT NOT NULL,
         description TEXT,
         status TEXT CHECK (status IN('open', 'in_progress', 'closed')) DEFAULT 'open',
-         created_by INTEGER REFERENCES users(id),
-      assigned_to INTEGER REFERENCES users(id)
+        created_by INTEGER REFERENCES users(id),
+        assigned_to INTEGER REFERENCES users(id)
         );
         
         CREATE TABLE IF NOT EXISTS comments (

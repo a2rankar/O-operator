@@ -1,9 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
-
 import express from 'express';
 import cors from 'cors';
-
 import authRoutes from './routes/authRoutes.js';
 import ticketsRoutes from './routes/ticketsRoutes.js';
 import { connectDb } from './config/database.js';
@@ -19,7 +17,7 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({error: 'Internal Server Error'});
 });
-
 connectDb().then(() => {
+     console.log('🟢 Connected to the database');
     app.listen(PORT, () => console.log(`Server runnin in ${PORT}`));
 });

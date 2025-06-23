@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from './Tickets.module.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-type Ticket = {
+import vector from '../../assets/Vector.svg'
+export type Ticket = {
     id: number;
     title: string;
     description: string;
@@ -21,11 +21,11 @@ const TicketLists = () => {
     const[name, setName] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [loading, setLoading] = useState(false);
-      // Отфильтруем последние три тикета
     const lastThreeTickets = tickets.slice(-3);
+        const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
   const handleTicketClick = (ticketId: number) => {
-    
+        const toggleMenu = () => setIsOpen(!isOpen);
     navigate(`/ticketDetail/${ticketId}`);
   };
     useEffect(() => {
@@ -75,11 +75,15 @@ const TicketLists = () => {
     
 
     return (
+        <div className={styles.container_2}>
+
+
         <div className={styles.container}>
             <div className={styles.barside}>
                 <div className={styles.tickets}>
                     <input type='checkbox'/> <p>Tickets</p>
                 </div>
+                <hr style={{width: '80%', border: '1px solid #3c3b3b', margin: '0px'}}/>
                 <div className={styles.dashboard}>
                 <   input type='checkbox'/>  <p>Dashboard</p>
                 </div>
@@ -87,13 +91,15 @@ const TicketLists = () => {
             <div className={styles.main}>
                 <div className={styles.header}>
                     <h1>Tickets</h1>
-                                <button onClick={() => setShowForm(!showForm)}>
-                                    {showForm ? 'Отмена' : 'Создать тикет'}
-                                </button>  
+                              
                         <div className={styles.selection}>
                             <select  className={styles.selection1}>
                                     <option value='' disabled className={styles.option}>
-                                            Status     
+                                            Status <img src={vector} style={{
+                                                transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                                                transition: 'transform 0.2s',
+                                                marginLeft: '8px'
+                                                }}/>    
                                     </option>
                                     <option value='open'>opened</option>
                                     <option value='close'>closed</option>
@@ -116,13 +122,13 @@ const TicketLists = () => {
                                 onChange={e => setDescription(e.target.value)}
                                 /> */}
                                 <button onClick={createTicket} disabled={loading}>
-                                {loading ? 'Создаём...' : 'Создать'}
+                                    {loading ? 'Создаём...' : 'Создать'}
                                 </button>
                             </div>
                             )}
             </div>
-
-                <hr className={styles.line}/>
+                  
+                <hr style={{border: '0.5px solid black', width: '100%', margin: '30px 20px 0px 0px'}}/>
 
                 <div className={styles.main_head}>
                     <p>Title</p>
@@ -142,7 +148,17 @@ const TicketLists = () => {
                                 <p>{ticket.name}</p>
                             </div>
                             <div className={styles.qw}>
-                                <p>{ticket.status}</p>
+                              <p
+                                className={`${styles.status_paint} ${
+                                    ticket.status === 'open' ? styles.status_open :
+                                    ticket.status === 'closed' ? styles.status_closed :
+                                    ticket.status === 'in_progress' ? styles.status_in_progress :
+                                    ''
+                                }`}
+                                >
+                                {ticket.status}
+                                </p>
+
                             </div>
                         </div>
                     ))}
@@ -150,7 +166,7 @@ const TicketLists = () => {
             </div>
       
         </div>
-        
+                </div>
     )
 }
  export default TicketLists;

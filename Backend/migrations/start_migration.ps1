@@ -1,4 +1,4 @@
-$env:PGPASSWORD = "adminpass"
+$env:PGPASSWORD = "qwe123"
 $migrationsFolder = "./"
 
 Get-ChildItem -Path $migrationsFolder -Filter *.sql | ForEach-Object {

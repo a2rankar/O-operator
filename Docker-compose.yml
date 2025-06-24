@@ -5,13 +5,14 @@
       image: postgres:15
       environment:
         POSTGRES_DB: ticketdb
-        POSTGRES_USER: admin
-        POSTGRES_PASSWORD: adminpass
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: qwe123
+      restart: always 
       volumes:
         - pgdata:/var/lib/postgresql/data
 
       healthcheck:
-        test: ["CMD-SHELL", "pg_isready -U admin"]
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
         interval: 10s
         retries: 5
 
@@ -21,7 +22,7 @@
         db:
           condition: service_healthy
       environment:
-        DATABASE_URL: postgres://admin:adminpass@db:5432/ticketdb
+        DATABASE_URL: postgres://postgres:qwe123@db:5432/ticketdb
         NODE_ENV: production
       ports:
         - "4003:4002"

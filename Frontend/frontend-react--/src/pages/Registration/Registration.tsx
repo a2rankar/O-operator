@@ -58,7 +58,7 @@ type registrationFormData = {
     return (
       
             <div className={styles.modal}>
-                <form onSubmit={handleSubmit (onSubmit)}>
+                <form className={styles.form} onSubmit={handleSubmit (onSubmit)}>
                         <h2>Registration</h2>
                         <p>Enter your credentials to access<br></br>
                             your account. </p>

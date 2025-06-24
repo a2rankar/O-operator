@@ -11,6 +11,14 @@ RUN npm install
 
 # Копируем остальной код
 COPY . .
+# В Dockerfile, после COPY . .
+# Копируем файл migrate.sh из папки migration
+COPY migrations/migrate.sh /app/migrate.sh
+RUN chmod +x /app/migrate.sh
 
-# Выполняем миграции (если есть скрипт)
+
+
+RUN apk add --no-cache postgresql-client
+
+
 CMD ["sh", "-c", "npm run migrate && npm run start"]

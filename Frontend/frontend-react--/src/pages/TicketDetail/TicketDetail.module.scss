@@ -153,12 +153,15 @@ p {
 
 input {
     width: 100%;
-    padding: 0px 0px 0px 5px;
+    padding: 0px;
+    border-radius: 5px;
+
 
 }
 }
 textarea {
         width: 100%;
+        padding: 0px;
         border-radius: 5px;
         color: #070707;
 background: none;

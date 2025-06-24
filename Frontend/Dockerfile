@@ -1,20 +1,9 @@
-# Этап сборки
-FROM node:18-alpine AS build
+FROM node:18-alpine AS builder
 WORKDIR /app
-
-# Копируем package.json и package-lock.json
-COPY package*.json ./
-
-# Устанавливаем зависимости
+COPY frontend-react--/ .    
 RUN npm install
-
-# Копируем остальной код
-COPY . .
-
-# Собираем проект
 RUN npm run build
 
-# Этап развертывания
 FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html

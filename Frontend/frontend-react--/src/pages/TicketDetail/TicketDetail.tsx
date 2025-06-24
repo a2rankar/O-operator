@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios  from "axios";
 import {useState, useEffect} from 'react'
 import styles from './TicketDetail.module.scss'
+import vector1 from '../..//assets/Vector1.svg'
 type Ticket = {
     id: number,
     title: string,
@@ -125,8 +126,7 @@ const TicketDetail = () => {
                             </div>
                                 <hr style={{width: '100%', margin: '0px'}}/>
                             <div className={styles.open_btn}>
-                                <button style={{background: 'none', color: 'black',border: 'none'}}>Open </button>
-                                
+                                <button style={{background: 'none', color: 'black',border: 'none', display: 'flex', justifyContent: 'space-between'}}>Open <img src={vector1}/></button>                             
                             </div>
                             <hr style={{width: '100%', margin: '0px'}}/>
                         </div>

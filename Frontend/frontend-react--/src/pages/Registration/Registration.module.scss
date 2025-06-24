@@ -1,24 +1,34 @@
 body {
     background-color: rgba(244, 244, 244, 0.918);
-}
 
-form {
+}
+.modal {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+     position: absolute; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ form {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: black;
     display: flex;
     flex-direction: column;
-    height: 450px;
+    height: 100%!important;
     width: 330px;
-    border: nooe;
+    border: none;
+    padding: 20px;
 
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-}
-input {
-    width: 250px;
-    padding: 15px;
+
+    input {
+    width: 80%;
+    padding: 5px;
     border-radius: 10px;
     background: transparent;
     border: 1px solid black;
@@ -26,11 +36,20 @@ input {
 }
 .input_cont {
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+}
+select {
+    height: 45px;
+    border-radius: 10px;
+    width: 84%
+    
 }
 button {
     width: 282px;
     height: 47.5px;
     margin-top: 20px;
+}
 }

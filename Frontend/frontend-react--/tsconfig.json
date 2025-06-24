@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "module": "ESNext",
+    "module": "ESNext", 
+    "moduleResolution": "bundler", 
     "target": "ESNext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
+    "jsx": "react-jsx",
     "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
-  "include": ["src", "index.js"]
+    "include": ["src", "src/types"]
 }

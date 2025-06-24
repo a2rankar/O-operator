@@ -42,9 +42,13 @@ const navigate  = useNavigate();
       
             <div className={styles.modal}>
                 <form onSubmit={handleSubmit (onSubmit)}>
+                    <div className={styles.head}>
+
+           
                         <h2>Login</h2>
-                        <p>Enter your credentials to access<br></br>
-                            your account. </p>
+                        <p>Enter your credentials to access<br></br>your account. </p>
+                    </div>
+                     
                             <div className={styles.input_cont}>
                                 <input type="email" placeholder="Email"
                                     {...register('username', {required: 'Email id reequireed'})}/>

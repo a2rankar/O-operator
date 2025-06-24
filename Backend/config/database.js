@@ -1,15 +1,23 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import  {Pool} from 'pg';
+import {Pool} from 'pg';
 
 
 const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
+//   host: process.env.DB_HOST,
+host: 'localhost',
   port: Number(process.env.DB_PORT),
   database: process.env.DB_NAME
 });
+// const pool = new Pool({
+//   user: 'postgres',
+//   password: 'qwe123',
+//   host: 'localhost',
+//   port: 5432,
+//   database: 'ticketdb',
+// });
 
 
 const connectDb = async () => {
@@ -19,6 +27,7 @@ const connectDb = async () => {
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         role TEXT CHECK (role IN ('operator', 'supervisor')) NOT NULL,
+      
         name TEXT 
     );
         
